@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_lock_idle_lock"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_lock_idle_lock"
+        android:title="@string/search_recipe"/>
+    <item
+        android:id="@+id/favourites"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_lock_idle_lock"
+        android:title="@string/favourites"/>
+    <item
+        android:id="@+id/trivia"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_lock_idle_lock"
+        android:title="@string/trivia"/>
+</menu>
