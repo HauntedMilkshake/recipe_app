@@ -12,20 +12,42 @@
         android:layout_height="wrap_content"
         android:text="@string/recipe_of_the_day"
         android:textColor="@color/vanilla"
-        android:textSize="22dp"
+        android:textSize="27dp"
         android:layout_marginTop="25dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginRight="45dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+<!--this is to be a custome view or a layout that displays recipes in a nice information-->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/recipe_of_the_day_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:src="@android:drawable/ic_lock_idle_lock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipe_of_the_day_text" />
+
+    <TextView
+        android:id="@+id/previously_viewed_recipes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/previous_recipes"
+        android:textColor="@color/vanilla"
+        android:textSize="25dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/viewPager2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_of_the_day_picture" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

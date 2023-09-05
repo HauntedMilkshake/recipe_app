@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="custom_bottom_nav_style">
+        <item name="android:background">@color/black</item>
+<!--        <item name="android:radius">@dimen/bottom_nav_corner_radius</item>-->
+    </style>
+</resources>
