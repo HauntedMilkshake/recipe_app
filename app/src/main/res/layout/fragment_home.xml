@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<!--this is to be a custome view or a layout that displays recipes in a nice information-->
+<!--this is to be a custom view or a layout that displays recipes in a nice information-->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/recipe_of_the_day_picture"
         android:layout_width="wrap_content"

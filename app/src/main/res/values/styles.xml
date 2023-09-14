@@ -4,4 +4,8 @@
         <item name="android:background">@color/black</item>
 <!--        <item name="android:radius">@dimen/bottom_nav_corner_radius</item>-->
     </style>
+    <style name="custom_search_icon" parent="Widget.AppCompat.SearchView">
+        <item name="android:searchIcon">@drawable/ic_bottom_nav_search</item>
+
+    </style>
 </resources>
