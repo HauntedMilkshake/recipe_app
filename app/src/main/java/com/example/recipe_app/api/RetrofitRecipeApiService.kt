@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 class RetrofitRecipeApiService: RecipeApiService {
     companion object {
-        const val API_KEY = "fe492119566446658e59d2c5d43876ef"
+        const val API_KEY = "HEHEHENONONO"
         const val API_HOST = "https://api.spoonacular.com/recipes"
 
         private var apiSingleton: RetrofitRecipeApiService? = null
