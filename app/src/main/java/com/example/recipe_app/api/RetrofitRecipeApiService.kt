@@ -7,12 +7,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Header
 
 class RetrofitRecipeApiService: RecipeApiService {
     companion object {
-        const val API_KEY = "HEHEHENONONO"
-        const val API_HOST = "https://api.spoonacular.com/recipes"
+        const val API_KEY = "funnymonkey"
+        const val API_HOST = "https://api.spoonacular.com/recipes/"
 
         private var apiSingleton: RetrofitRecipeApiService? = null
         private var adapter = RecipeAdapter()
@@ -47,9 +47,7 @@ class RetrofitRecipeApiService: RecipeApiService {
 
 
 
-interface RecipeApi{
+interface RecipeApi {
     @GET("complexSearch")
-    suspend fun getRecipe(@Query("apiKey") apiKey: String): List<DomainRecipe>
-
-//    suspend fun getRecipe(@Query("apiKey") apiKey: String, @Query("cuisine") query: String): List<DomainRecipe>
+    suspend fun getRecipe(@Header("x-api-key") apiKey: String): List<DomainRecipe>
 }

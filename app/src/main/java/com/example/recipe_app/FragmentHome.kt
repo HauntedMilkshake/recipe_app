@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.recipe_app.api.RetrofitRecipeApiService
 import com.example.recipe_app.data.BareRecipe
 import com.example.recipe_app.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 class FragmentHome : Fragment() {
@@ -33,9 +35,8 @@ class FragmentHome : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            try {
-                recipeOfTheDayText.text = homeViewModel.getRecipe().title
-            }catch (e: Exception){
+            homeViewModel.recipe.observe(viewLifecycleOwner){
+                recipeOfTheDayText.text = it.title
             }
         }
     }
@@ -47,14 +48,17 @@ class FragmentHome : Fragment() {
 }
 class FragmentHomeViewModel(application: MyApplication): AndroidViewModel(application) {
     private var api: RetrofitRecipeApiService = application.apiService
-    private lateinit var recipe: BareRecipe
-    init{
-      runBlocking {
-         launch {
-             recipe = api.getSingleRecipe()!!
-             Log.d("RECIPE", recipe.toString())
-        }
-      }
+    private val _recipe = MutableLiveData<BareRecipe>()
+     val recipe: LiveData<BareRecipe> get() = _recipe
+    init {
+        fetchRecipe()
     }
-    fun getRecipe() = recipe
+
+    private fun fetchRecipe() {
+        viewModelScope.launch {
+                val result = api.getSingleRecipe()
+                _recipe.postValue(result ?: BareRecipe(id=1, title="sex", image="idc"))
+                Log.d("RECIPE", result.toString())
+        }
+    }
 }
