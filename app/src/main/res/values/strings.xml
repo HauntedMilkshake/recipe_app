@@ -14,8 +14,10 @@
     <string name="trivia">trivia</string>
     <!-- Strings used for text views -->
     <!-- Strings for home screen -->
-    <string name="previous_recipes">These are some you have tried!</string>
+    <string name="random_liked_recipes">These are some of your favourites!</string>
     <string name="recipe_of_the_day">Want to try something <font color="#FC9F5B">new</font>?</string>
+    <!-- Strings used for custom recipe view -->
+    <string name="recipe_text">Placeholder Recipe Text</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

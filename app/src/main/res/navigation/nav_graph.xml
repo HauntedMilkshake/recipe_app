@@ -13,28 +13,49 @@
 
         <action
             android:id="@+id/home_to_search"
-            app:destination="@id/search" />
+            app:destination="@+id/search" />
         <action
             android:id="@+id/home_to_favourites"
             app:destination="@+id/favourites"/>
         <action
             android:id="@+id/home_to_trivia"
             app:destination="@+id/trivia"/>
+        <action
+            android:id="@+id/home_to_recipe_information"
+            app:destination="@+id/recipe_information" />
     </fragment>
     <fragment
         android:id="@+id/search"
-        android:name="com.example.recipe_app.FragmentRecipesSearch"
+        android:name="com.example.recipe_app.search.FragmentRecipesSearch"
         android:label="@string/fragment_search_recipes"
-        tools:layout="@layout/fragment_recipes_search"/>
+        tools:layout="@layout/fragment_recipes_search">
+        <action
+            android:id="@+id/search_to_recipe_information"
+            app:destination="@+id/recipe_information" />
+    </fragment>
     <fragment
         android:id="@+id/trivia"
         android:name="com.example.recipe_app.FragmentRandomFoodFacts"
         android:label="@string/trivia"
-        tools:layout="@layout/fragment_random_food_facts" />
+        tools:layout="@layout/fragment_random_food_facts" >
+        <action
+            android:id="@+id/trivia_to_recipe_information"
+            app:destination="@+id/recipe_information" />
+    </fragment>
     <fragment
         android:id="@+id/favourites"
         android:name="com.example.recipe_app.FragmentFavourites"
         android:label="@string/favourites"
-        tools:layout="@layout/fragment_favourites"/>
+        tools:layout="@layout/fragment_favourites">
+        <action
+            android:id="@+id/favourites_to_recipe_information"
+            app:destination="@+id/recipe_information" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recipe_information"
+        android:name="com.example.recipe_app.FragmentRecipeInformation"
+        android:label="@string/fragment_recipe_information"
+        tools:layout="@layout/fragment_recipe_information"/>
 
 </navigation>

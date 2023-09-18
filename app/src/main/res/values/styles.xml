@@ -6,6 +6,10 @@
     </style>
     <style name="custom_search_icon" parent="Widget.AppCompat.SearchView">
         <item name="android:searchIcon">@drawable/ic_bottom_nav_search</item>
-
     </style>
+    <style name="rounded_image_view_style">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
+    </style>
+
 </resources>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/oxford_blue">
+    android:background="@color/oxford_blue"
+    >
 
     <TextView
         android:id="@+id/recipe_of_the_day_text"
@@ -18,28 +19,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<!--this is to be a custom view or a layout that displays recipes in a nice information-->
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/recipe_of_the_day_picture"
+
+    <TextView
+        android:id="@+id/recipe_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:src="@android:drawable/ic_lock_idle_lock"
+        android:layout_marginTop="20dp"
+        android:padding="16dp"
+        android:text="@string/recipe_text"
+        android:textColor="@color/sandy_brown"
+        android:textSize="23dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/recipe_image"
+        app:layout_constraintTop_toTopOf="@+id/recipe_image" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/recipe_image"
+        android:layout_width="231dp"
+        android:layout_height="231dp"
+        android:background="@drawable/rounded_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_of_the_day_text" />
+        app:layout_constraintTop_toBottomOf="@+id/recipe_of_the_day_text"
+        app:shapeAppearanceOverlay="@style/rounded_image_view_style"
+        />
 
     <TextView
         android:id="@+id/previously_viewed_recipes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/previous_recipes"
+        android:text="@string/random_liked_recipes"
         android:textColor="@color/vanilla"
         android:textSize="25dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager2"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_image" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
@@ -48,6 +62,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_of_the_day_picture" />
+        app:layout_constraintTop_toBottomOf="@+id/previously_viewed_recipes" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
