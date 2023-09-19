@@ -1,23 +1,27 @@
 package com.example.recipe_app.search
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe_app.data.AutoCompleteResult
+import com.example.recipe_app.data.BareRecipe
 import com.example.recipe_app.databinding.FragmentRecipesSearchBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class FragmentRecipesSearch: Fragment() {
     private var _binding: FragmentRecipesSearchBinding? = null
 
     private val binding get() = _binding!!
     private val searchViewModel: FragmentRecipesSearchViewModel by viewModels()
+    private val handler = Handler(Looper.getMainLooper())
 
 
     override fun onCreateView(
@@ -33,63 +37,66 @@ class FragmentRecipesSearch: Fragment() {
         val autocompleteAdapter = AutoCompleteAdapter().apply {
             itemClickListener = object : ItemClickListener<AutoCompleteResult> {
                 override fun onItemClicked(item: AutoCompleteResult, itemPosition: Int) {
-                    //todo make the auto complete reset and send in a new api get request for example
+                    Log.d("CLICKED", "WOW")
+                    //submit is whether to search immediately after youve autofilled or keep typing and wait for enter to be pressed
+                    binding.recipeSearchBar.setQuery(item.title, false)
                 }
             }
         }
+        val searchAdapter = SearchAdapter().apply {
+            itemClickListener = object : ItemClickListener<BareRecipe> {
+                override fun onItemClicked(item: BareRecipe, itemPosition: Int) {
+                    //go to fragment with recipe information and send the id as an argument
+                }
+            }
+        }
+
         binding.apply {
-            autocompleteRecyclerView.adapter = autocompleteAdapter
-//            recipeSearchBar.let {
-//                it.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//                    override fun onQueryTextSubmit(query: String?): Boolean {
-//                        query?.let{
-//                            searchViewModel.fetchAutoCompleteText(query)
-//                            autocompleteAdapter.updateItems(searchViewModel.autoCompleteText.value!!)
-//                        }
-//                        return true
-//                    }
-//
-//                    override fun onQueryTextChange(query: String?): Boolean {
-//                        query?.let {
-//                            searchViewModel.fetchAutoCompleteText(query)
-//                            autocompleteAdapter.updateItems(searchViewModel.autoCompleteText.value!!)
-//                        }
-//                        return true
-//                    }
-//                })
-//            }
-            autocompleteRecyclerView.adapter = autocompleteAdapter
-            recipeSearchBar.let { searchView ->
-                val queryTextListener = object : SearchView.OnQueryTextListener,
-                    androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            autocompleteRecyclerView.apply{
+                layoutManager = LinearLayoutManager(requireContext())
+                //this.addItemDecoration(SpacingItemDecoration(2))
+                adapter = autocompleteAdapter
+            }
+            searchRecyclerView.apply {
+                layoutManager = GridLayoutManager(context, 2)
+                adapter = searchAdapter
+
+            }
+            recipeSearchBar.let {
+                it.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        query?.let {
-                            searchViewModel.fetchAutoCompleteText(it)
-                            autocompleteAdapter.updateItems(searchViewModel.autoCompleteText.value!!)
+                        query?.let{
+                            searchViewModel.fetchRecipes(query)
                         }
                         return true
                     }
 
                     override fun onQueryTextChange(query: String?): Boolean {
                         query?.let {
-
-                            searchViewModel.fetchAutoCompleteText(it)
-
-                            autocompleteAdapter.updateItems(searchViewModel.autoCompleteText.value!!)
+                            handler.removeCallbacksAndMessages(null)
+                            handler.postDelayed({
+                                searchViewModel.fetchAutoCompleteText(query)
+                            }, 1000)
                         }
                         return true
                     }
-                }
-                searchView.setOnQueryTextListener(queryTextListener)
+                })
             }
         }
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        searchViewModel.autoCompleteText.observe(viewLifecycleOwner){
+            Log.d("AutoCompleteData", it.toString())
+            binding.apply { autocompleteAdapter.updateItems(it) }
+        }
+        searchViewModel.recipes.observe(viewLifecycleOwner){
+            binding.apply { searchAdapter.updateItems(it) }
+        }
     }
 }
+//class SpacingItemDecoration(private val spacing: Int) : RecyclerView.ItemDecoration() {
+//    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+//        outRect.bottom = spacing
+//    }
+//}
+
 
 

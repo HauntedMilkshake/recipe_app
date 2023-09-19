@@ -1,9 +1,9 @@
 package com.example.recipe_app.api
 
+import com.example.recipe_app.data.ApiRecipeResponse
 import com.example.recipe_app.data.AutoCompleteResult
 import com.example.recipe_app.data.BareRecipe
 import com.example.recipe_app.data.DomainAutoComplete
-import com.example.recipe_app.data.RecipeResponse
 import com.example.recipe_app.utils.AutoCompleteAdapter
 import com.example.recipe_app.utils.RecipeAdapter
 import retrofit2.Retrofit
@@ -41,9 +41,9 @@ class RetrofitRecipeApiService: RecipeApiService {
 
 interface RecipeApi {
     @GET("complexSearch")
-    suspend fun getRecipes(@Query("apiKey") apiKey: String, @Query("query") query: String, @Query("number") number: Int = 1): RecipeResponse
+    suspend fun getRecipes(@Query("apiKey") apiKey: String, @Query("query") query: String, @Query("number") number: Int = 6): ApiRecipeResponse
     @GET("random")
-    suspend fun getRandomRecipe(@Query("apiKey") apiKey: String, @Query("number") number: Int = 1): RecipeResponse
+    suspend fun getRandomRecipe(@Query("apiKey") apiKey: String, @Query("number") number: Int = 1): ApiRecipeResponse
     @GET("autocomplete")
     suspend fun getAutoCompleteSearch(@Query("apiKey") apiKey: String, @Query("query") query: String, @Query("number") number: Int = 5): List<DomainAutoComplete>
 

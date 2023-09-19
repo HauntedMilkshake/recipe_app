@@ -3,8 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="oxford_blue">#001427</color>
+    <color name="midnight_green">#024958</color>
     <color name="sandy_brown">#FC9F5B</color>
     <color name="vanilla">#F0F2A6</color>
     <color name="robin_egg_blue">#59C3C3</color>
     <color name="zomp">#539987</color>
+
 </resources>

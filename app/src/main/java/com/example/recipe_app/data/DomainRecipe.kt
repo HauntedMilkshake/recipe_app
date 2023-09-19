@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class RecipeResponse(
+data class ApiRecipeResponse(
     @JsonProperty("results") val results: List<Recipe?> = emptyList(),
     @JsonProperty("offset") val offset: Int? = 0,
     @JsonProperty("number") val number: Int? = 0,
