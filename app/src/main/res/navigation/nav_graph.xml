@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.recipe_app.FragmentHome"
+        android:name="com.example.recipe_app.home.FragmentHome"
         android:label="@string/fragment_home"
         tools:layout="@layout/fragment_home">
 
@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/recipe_information"
-        android:name="com.example.recipe_app.FragmentRecipeInformation"
+        android:name="com.example.recipe_app.information.FragmentRecipeInformation"
         android:label="@string/fragment_recipe_information"
         tools:layout="@layout/fragment_recipe_information"/>
 

@@ -53,6 +53,9 @@ class AutoCompleteAdapter : RecyclerView.Adapter<AutoCompleteAdapter.AutoComplet
             fun bind(autoComplete: AutoCompleteResult) {
                 Log.d("BINDING DATA", "${autoComplete.toString()}")
                 textView.text = autoComplete.title
+                textView.setOnClickListener{
+                    itemClickListener?.onItemClicked(autoComplete, absoluteAdapterPosition)
+                }
              }
         }
     }

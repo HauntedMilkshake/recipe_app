@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipe_app.R
 import com.example.recipe_app.data.AutoCompleteResult
 import com.example.recipe_app.data.BareRecipe
 import com.example.recipe_app.databinding.FragmentRecipesSearchBinding
@@ -46,6 +49,7 @@ class FragmentRecipesSearch: Fragment() {
         val searchAdapter = SearchAdapter().apply {
             itemClickListener = object : ItemClickListener<BareRecipe> {
                 override fun onItemClicked(item: BareRecipe, itemPosition: Int) {
+                    findNavController().navigate(R.id.search_to_recipe_information, bundleOf("recipe_id" to item.id))
                     //go to fragment with recipe information and send the id as an argument
                 }
             }

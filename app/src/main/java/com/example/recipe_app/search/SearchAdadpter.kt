@@ -38,6 +38,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchAdapterViewHolder
                 .load(recipe.imageUrl)
                 .into(recipeImage)
             recipeTitle.text = recipe.title
+            recipeImage.setOnClickListener {
+                itemClickListener?.onItemClicked(recipe, absoluteAdapterPosition)
+            }
 
         }
     }

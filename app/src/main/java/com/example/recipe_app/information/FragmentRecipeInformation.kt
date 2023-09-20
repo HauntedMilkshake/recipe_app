@@ -1,4 +1,4 @@
-package com.example.recipe_app
+package com.example.recipe_app.information
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ class FragmentRecipeInformation: Fragment() {
     private var _binding: FragmentRecipeInformationBinding? = null
 
     private val binding get() = _binding!!
+    private val receivedId = arguments?.getInt("recipe_id")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

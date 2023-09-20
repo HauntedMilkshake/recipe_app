@@ -1,13 +1,15 @@
-package com.example.recipe_app
+package com.example.recipe_app.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.recipe_app.R
 import com.example.recipe_app.databinding.FragmentHomeBinding
 
 
@@ -35,8 +37,9 @@ class FragmentHome : Fragment() {
                    .load(it.imageUrl)
                    //.transition(DrawableTransitionOptions.withCrossFade())
                    .into(binding.recipeImage)
+                binding.recipeImage.setOnClickListener { findNavController().navigate(R.id.home_to_recipe_information, bundleOf("recipe_id" to it.id)) }
+
             }
-            binding.recipeImage.setOnClickListener { findNavController().navigate(R.id.home_to_recipe_information) }
     }
 
     override fun onDestroyView() {
