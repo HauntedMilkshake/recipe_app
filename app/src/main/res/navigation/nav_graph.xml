@@ -56,6 +56,15 @@
         android:id="@+id/recipe_information"
         android:name="com.example.recipe_app.information.FragmentRecipeInformation"
         android:label="@string/fragment_recipe_information"
-        tools:layout="@layout/fragment_recipe_information"/>
+        tools:layout="@layout/fragment_recipe_information">
+        <action
+            android:id="@+id/information_to_search"
+            app:destination="@+id/search"
+            />
+        <action
+            android:id="@+id/information_to_home"
+            app:destination="@+id/home"
+            />
+    </fragment>
 
 </navigation>

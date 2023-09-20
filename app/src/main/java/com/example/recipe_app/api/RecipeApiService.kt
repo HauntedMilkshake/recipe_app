@@ -1,13 +1,13 @@
 package com.example.recipe_app.api
 
-import com.example.recipe_app.data.AnalyzedRecipeDomain
+import com.example.recipe_app.data.AnalyzedRecipe
 import com.example.recipe_app.data.AutoCompleteResult
-import com.example.recipe_app.data.BareRecipe
+import com.example.recipe_app.data.RecipeResponse
 
 interface RecipeApiService {
 
-    suspend fun getRecipesByComplexSearch(query: String): List<BareRecipe>
-    suspend fun getRandomRecipe(): BareRecipe?
+    suspend fun getRecipesByComplexSearch(query: String): List<RecipeResponse>
+    suspend fun getRandomRecipe(): AnalyzedRecipe?
     suspend fun getAutoComplete(query: String): List<AutoCompleteResult>
-    suspend fun getRecipeById(id: Int): AnalyzedRecipeDomain
+    //suspend fun getRecipeById(id: Int): AnalyzedRecipe?
 }

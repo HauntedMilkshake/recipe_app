@@ -1,7 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/oxford_blue">
+
+   <com.google.android.material.imageview.ShapeableImageView
+       android:id="@+id/back_button"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+       android:layout_marginLeft="20dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <com.google.android.material.imageview.ShapeableImageView
+       android:id="@+id/favourite_button"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+       android:layout_marginRight="20dp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <com.google.android.material.imageview.ShapeableImageView
+       android:id="@+id/recipe_image"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/ic_search_settings"
+       android:layout_marginLeft="45dp"
+       android:layout_marginTop="45dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <TextView
+       android:id="@+id/recipe_title"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+       android:textColor="@color/vanilla"
+       android:textSize="20sp"
+       app:layout_constraintStart_toStartOf="@+id/recipe_image"
+       app:layout_constraintTop_toBottomOf="@+id/recipe_image" />
+
+   <TextView
+       android:id="@+id/instructions_button"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="GO TO INSTRUCTIONS ->"
+       android:textSize="20dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

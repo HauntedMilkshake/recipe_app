@@ -1,7 +1,7 @@
 package com.example.recipe_app.data
 
 
-data class BareRecipe(
+data class RecipeResponse(
     val id: Int,
     val title: String,
     val imageUrl: String,
