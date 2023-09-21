@@ -1,6 +1,7 @@
 package com.example.recipe_app.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,13 +32,14 @@ class FragmentHome : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            homeViewModel.recipe.observe(viewLifecycleOwner){
-                binding.recipeText.text = it.title
+            homeViewModel.recipe.observe(viewLifecycleOwner){ recipe ->
+                binding.recipeText.text = recipe.title
                Glide.with(this)
-                   .load(it.imageUrl)
+                   .load(recipe.imageUrl)
                    //.transition(DrawableTransitionOptions.withCrossFade())
                    .into(binding.recipeImage)
-                binding.recipeImage.setOnClickListener { findNavController().navigate(R.id.home_to_recipe_information, bundleOf("recipe_id" to it.id)) }
+                Log.d("IDTOSEND", recipe.id.toString())
+                binding.recipeImage.setOnClickListener { findNavController().navigate(R.id.home_to_recipe_information, bundleOf("recipe_id" to recipe.id)) }
 
             }
     }

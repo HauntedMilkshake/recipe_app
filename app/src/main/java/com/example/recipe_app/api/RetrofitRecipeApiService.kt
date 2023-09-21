@@ -2,6 +2,7 @@ package com.example.recipe_app.api
 
 import android.util.Log
 import com.example.recipe_app.data.AnalyzedRecipe
+import com.example.recipe_app.data.AnalyzedRecipeResponse
 import com.example.recipe_app.data.ApiRecipeResponse
 import com.example.recipe_app.data.AutoCompleteResult
 import com.example.recipe_app.data.AutoCompleteResultApiResponse
@@ -46,12 +47,9 @@ class RetrofitRecipeApiService: RecipeApiService {
     }
 
     override suspend fun getRecipesByComplexSearch(query: String): List<RecipeResponse> = recipeApi.getRecipesByComplexSearch(API_KEY, query).results.mapNotNull { recipe ->  recipeAdapter.adapt(recipe!!) }
-    override suspend fun getRandomRecipe(): AnalyzedRecipe? = analyzedRecipeAdapter.adapt(recipeApi.getRandomRecipe(API_KEY).responses!!.first().also{ Log.d("RANDOMRECIPE", it.toString())})
+    override suspend fun getRandomRecipe(): AnalyzedRecipe? = analyzedRecipeAdapter.adapt(recipeApi.getRandomRecipe(API_KEY).responses!!.first())
     override suspend fun getAutoComplete(query: String): List<AutoCompleteResult> = recipeApi.getAutoCompleteSearchSuggestions(API_KEY, query).mapNotNull { searchAdapter.adapt(it) }
-   // override suspend fun getRecipeById(id: Int) {
-        //TODO()
-    //}
-    //: AnalyzedRecipe? = analyzedRecipeAdapter.adapt(recipeApi.getRecipeById(id, API_KEY))
+    override suspend fun getRecipeById(id: Int): AnalyzedRecipe? = analyzedRecipeAdapter.adapt(recipeApi.getRecipeById(id, API_KEY))
 }
 
 interface RecipeApi {
@@ -62,7 +60,7 @@ interface RecipeApi {
     @GET("autocomplete")
     suspend fun getAutoCompleteSearchSuggestions(@Query("apiKey") apiKey: String, @Query("query") query: String, @Query("number") number: Int = 5): List<AutoCompleteResultApiResponse>
     @GET("{id}/information")
-    suspend fun getRecipeById(@Path("id") id: Int, @Query("apiKey") apiKey: String): Response
+    suspend fun getRecipeById(@Path("id") id: Int, @Query("apiKey") apiKey: String): AnalyzedRecipeResponse
 
 //    @GET("{id}/nutritionWidget.json")
 //    suspend fun getRecipeNutritionById(@Path("id") id: Int, @Query("apiKey") apiKey: String):

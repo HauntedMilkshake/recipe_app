@@ -26,9 +26,8 @@
 
    <com.google.android.material.imageview.ShapeableImageView
        android:id="@+id/recipe_image"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:src="@drawable/ic_search_settings"
+       android:layout_width="100dp"
+       android:layout_height="100dp"
        android:layout_marginLeft="45dp"
        android:layout_marginTop="45dp"
        app:layout_constraintStart_toStartOf="parent"

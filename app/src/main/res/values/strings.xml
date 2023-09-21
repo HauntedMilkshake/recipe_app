@@ -7,6 +7,7 @@
     <string name="fragment_search_recipes">Search Recipes</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="fragment_recipe_instructions">Recipe Instructions</string>
     <!-- Strings used for bottom navigation bar -->
     <string name="search_recipe">search</string>
     <string name="favourites">favourites</string>

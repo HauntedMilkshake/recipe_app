@@ -2,18 +2,17 @@ package com.example.recipe_app.utils
 
 import com.example.recipe_app.common.Adapter
 import com.example.recipe_app.data.AnalyzedRecipe
-import com.example.recipe_app.data.Response
+import com.example.recipe_app.data.AnalyzedRecipeResponse
 
-//import com.example.recipe_app.data.Response
-class AnalyzedRecipeAdapter: Adapter<Response.AnalyzedRecipeResponse, AnalyzedRecipe> {
-    override fun adapt(t: Response.AnalyzedRecipeResponse): AnalyzedRecipe? {
-        return if(t.title == null || t.vegetarian == null || t.image == null || t.vegetarian == null || t.vegan == null || t.glutenFree == null || t.dairyFree == null || t.readyInMinutes == null || t.servings == null || t.instructions == null || t.ingredients == null){
+class AnalyzedRecipeAdapter : Adapter<AnalyzedRecipeResponse, AnalyzedRecipe> {
+    override fun adapt(t: AnalyzedRecipeResponse): AnalyzedRecipe? {
+        return if (t.title == null || t.vegetarian == null || t.image == null || t.vegetarian == null || t.vegan == null || t.glutenFree == null || t.dairyFree == null || t.readyInMinutes == null || t.servings == null || t.instructions == null || t.ingredients == null) {
             null
-        }else{
+        } else {
             return AnalyzedRecipe(
-//                id = t.id,
+                id = t.id,
                 title = t.title,
-                isVegeterian = t.vegetarian,
+                isVegetarian = t.vegetarian,
                 imageUrl = t.image,
                 isVegan = t.vegan,
                 isGlutenFree = t.glutenFree,
@@ -24,21 +23,31 @@ class AnalyzedRecipeAdapter: Adapter<Response.AnalyzedRecipeResponse, AnalyzedRe
                 ingredients = adaptIngredients(t.ingredients)
             )
         }
+    }
 
+    fun adaptInstructions(instructions: List<AnalyzedRecipeResponse.Instruction>?): List<AnalyzedRecipe.Instruction> {
+        return instructions?.mapIndexed { index, it ->
+            AnalyzedRecipe.Instruction(
+                stepNumber = index + 1, // Assuming step numbers start from 1
+                instruction = it.instruction ?: ""
+            )
+        } ?: emptyList()
     }
-    fun adaptInstructions(instructions: List<Response.Instruction>?): List<AnalyzedRecipe.Instruction>{
-        return instructions?.map {
-                AnalyzedRecipe.Instruction(
-                    stepNumber = it.number ?: 0,
-                    instruction = it.instruction ?: ""
-                )
-            } ?: emptyList()
-    }
-    fun adaptIngredients(ingredients: List<Response.Ingredient>?): List<AnalyzedRecipe.Ingredient>{
+//    fun adaptInstructions(instructions: List<AnalyzedRecipeResponse.Instruction>?): List<AnalyzedRecipe.Instruction>{
+//        return instructions?.map {
+//            AnalyzedRecipe.Instruction(
+//                stepNumber = it.number ?: 0,
+//                instruction = it.instruction ?: ""
+//            )
+//        } ?: emptyList()
+//    }
+
+
+    fun adaptIngredients(ingredients: List<AnalyzedRecipeResponse.Ingredient>?): List<AnalyzedRecipe.Ingredient> {
         return ingredients?.map {
             AnalyzedRecipe.Ingredient(
                 name = it.name ?: "",
-                amount = (it.amount ?: 0) as Float, // ???
+                amount = (it.amount ?: 0.0) as Float, // Use 0.0 for a default value
                 unit = it.unit ?: ""
             )
         } ?: emptyList()

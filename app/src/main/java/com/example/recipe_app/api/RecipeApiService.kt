@@ -9,5 +9,5 @@ interface RecipeApiService {
     suspend fun getRecipesByComplexSearch(query: String): List<RecipeResponse>
     suspend fun getRandomRecipe(): AnalyzedRecipe?
     suspend fun getAutoComplete(query: String): List<AutoCompleteResult>
-    //suspend fun getRecipeById(id: Int): AnalyzedRecipe?
+    suspend fun getRecipeById(id: Int): AnalyzedRecipe?
 }
