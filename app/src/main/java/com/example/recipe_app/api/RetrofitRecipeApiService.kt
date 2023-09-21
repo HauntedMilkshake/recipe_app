@@ -1,17 +1,18 @@
 package com.example.recipe_app.api
 
+//import com.example.recipe_app.data.Response
 import android.util.Log
-import com.example.recipe_app.data.AnalyzedRecipe
-import com.example.recipe_app.data.AnalyzedRecipeResponse
 import com.example.recipe_app.data.ApiRecipeResponse
 import com.example.recipe_app.data.AutoCompleteResult
 import com.example.recipe_app.data.AutoCompleteResultApiResponse
-import com.example.recipe_app.data.RecipeResponse
-import com.example.recipe_app.data.Response
-//import com.example.recipe_app.data.Response
-import com.example.recipe_app.utils.AnalyzedRecipeAdapter
+import com.example.recipe_app.data.EnhancedRecipe
+import com.example.recipe_app.data.EnhancedRecipeResponse
+import com.example.recipe_app.data.Instructions
+import com.example.recipe_app.data.InstructionsResponse
+import com.example.recipe_app.data.Recipe
 import com.example.recipe_app.utils.AutoCompleteAdapter
-import com.example.recipe_app.utils.NutrientAdapter
+import com.example.recipe_app.utils.EnhancedRecipeAdapter
+import com.example.recipe_app.utils.InstructionsAdapter
 import com.example.recipe_app.utils.RecipeAdapter
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -24,14 +25,15 @@ import retrofit2.http.Query
 
 class RetrofitRecipeApiService: RecipeApiService {
     companion object {
-        const val API_KEY = "fe492119566446658e59d2c5d43876ef"
+        const val API_KEY = "f26558dd27724c46aa0b87505416b908"
         const val API_HOST = "https://api.spoonacular.com/recipes/"
 
         private var apiSingleton: RetrofitRecipeApiService? = null
         private var recipeAdapter = RecipeAdapter()
         private var searchAdapter = AutoCompleteAdapter()
-        private var analyzedRecipeAdapter = AnalyzedRecipeAdapter()
-        private var nutrientAdapter = NutrientAdapter()
+        private var enhancedRecipeAdapter = EnhancedRecipeAdapter()
+        private var instructionsAdapter = InstructionsAdapter()
+//        private var nutrientAdapter = NutrientAdapter()
         fun getApi() = apiSingleton ?: RetrofitRecipeApiService()
     }
 
@@ -40,29 +42,52 @@ class RetrofitRecipeApiService: RecipeApiService {
     init {
         val retrofit = Retrofit.Builder()
             .baseUrl(API_HOST)
-            .addConverterFactory(JacksonConverterFactory.create(ObjectMapper().enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)))
+            .addConverterFactory(
+                JacksonConverterFactory.create(
+                    ObjectMapper().enable(
+                        DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY
+                    )
+                )
+            )
             .build()
 
         recipeApi = retrofit.create()
     }
 
-    override suspend fun getRecipesByComplexSearch(query: String): List<RecipeResponse> = recipeApi.getRecipesByComplexSearch(API_KEY, query).results.mapNotNull { recipe ->  recipeAdapter.adapt(recipe!!) }
-    override suspend fun getRandomRecipe(): AnalyzedRecipe? = analyzedRecipeAdapter.adapt(recipeApi.getRandomRecipe(API_KEY).responses!!.first())
+    override suspend fun getRecipesByComplexSearch(query: String) : List<Recipe> = recipeApi.getRecipesByComplexSearch(API_KEY, query).results.mapNotNull { recipeAdapter.adapt(it!!) }
+
+    override suspend fun getRandomRecipe(): EnhancedRecipe? = enhancedRecipeAdapter.adapt(recipeApi.getRandomRecipe(API_KEY).first().recipes!!.first()).also { Log.d("RANDOMRECIPE", it.toString()) }
+
     override suspend fun getAutoComplete(query: String): List<AutoCompleteResult> = recipeApi.getAutoCompleteSearchSuggestions(API_KEY, query).mapNotNull { searchAdapter.adapt(it) }
-    override suspend fun getRecipeById(id: Int): AnalyzedRecipe? = analyzedRecipeAdapter.adapt(recipeApi.getRecipeById(id, API_KEY))
+
+    override suspend fun getRecipeById(id: Int): EnhancedRecipe? = enhancedRecipeAdapter.adapt(recipeApi.getRecipeById(id, API_KEY))
+
+    override suspend fun getRecipeInstructionsById(id: Int): List<Instructions> = recipeApi.getRecipeInstructionsByRecipeId(id, API_KEY).first().instructions!!.mapNotNull { instructionsAdapter.adapt(it) }
+    override suspend fun getRecipeByIngredientSearch(query: String): List<Recipe> = recipeApi.getRecipesByIngredients(API_KEY, query).results.mapNotNull { recipeAdapter.adapt(it!!) }
+    override suspend fun getRecipeByNutrientSearch(query: String): List<Recipe> = recipeApi.getRecipesByNutrientSearch(API_KEY, query).results.mapNotNull { recipeAdapter.adapt(it!!) }
 }
 
 interface RecipeApi {
     @GET("complexSearch")
     suspend fun getRecipesByComplexSearch(@Query("apiKey") apiKey: String, @Query("query") query: String, @Query("number") number: Int = 6): ApiRecipeResponse
+    @GET("findByNutrients")
+    suspend fun getRecipesByNutrientSearch(@Query("apiKey") apiKey: String, @Query("query") query: String, @Query("number") number: Int = 6): ApiRecipeResponse
+    @GET("findByIngredients")
+    suspend fun getRecipesByIngredients(@Query("apiKey") apiKey: String, @Query("query") query: String, @Query("number") number: Int = 6): ApiRecipeResponse
+
     @GET("random")
-    suspend fun getRandomRecipe(@Query("apiKey") apiKey: String, @Query("number") number: Int = 1): Response
+    suspend fun getRandomRecipe(@Query("apiKey") apiKey: String, @Query("number") number: Int = 1): List<EnhancedRecipeResponse>
     @GET("autocomplete")
     suspend fun getAutoCompleteSearchSuggestions(@Query("apiKey") apiKey: String, @Query("query") query: String, @Query("number") number: Int = 5): List<AutoCompleteResultApiResponse>
     @GET("{id}/information")
-    suspend fun getRecipeById(@Path("id") id: Int, @Query("apiKey") apiKey: String): AnalyzedRecipeResponse
+    suspend fun getRecipeById(@Path("id") id: Int, @Query("apiKey") apiKey: String): EnhancedRecipeResponse.EnhancedRecipe
+
+    @GET("{id}/analyzedInstructions")
+    suspend fun getRecipeInstructionsByRecipeId(@Path("id") id: Int, @Query("apiKey") apiKey: String): List<InstructionsResponse>
+
 
 //    @GET("{id}/nutritionWidget.json")
+
 //    suspend fun getRecipeNutritionById(@Path("id") id: Int, @Query("apiKey") apiKey: String):
 
 }

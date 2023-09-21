@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipe_app.R
-import com.example.recipe_app.data.RecipeResponse
+import com.example.recipe_app.data.Recipe
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchAdapterViewHolder>() {
-    private val items = ArrayList<RecipeResponse>()
-    var itemClickListener: ItemClickListener<RecipeResponse>? = null
+    private val items = ArrayList<Recipe>()
+    var itemClickListener: ItemClickListener<Recipe>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.SearchAdapterViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_recyclerview_search, parent, false)
@@ -25,7 +25,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchAdapterViewHolder
 
     override fun getItemCount(): Int = items.size
 
-    fun updateItems(newItems: List<RecipeResponse>) {
+    fun updateItems(newItems: List<Recipe>) {
         items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()
@@ -33,9 +33,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchAdapterViewHolder
     inner class SearchAdapterViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val recipeImage = view.findViewById<ImageView>(R.id.recipe_image)
         private val recipeTitle = view.findViewById<TextView>(R.id.recipe_title)
-        fun bind(recipe: RecipeResponse){
+        fun bind(recipe: Recipe){
             Glide.with(recipeImage)
-                .load(recipe.imageUrl)
+                .load(recipe.image)
                 .into(recipeImage)
             recipeTitle.text = recipe.title
             recipeImage.setOnClickListener {

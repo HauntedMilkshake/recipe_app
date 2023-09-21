@@ -49,6 +49,7 @@
        android:layout_height="wrap_content"
        android:text="GO TO INSTRUCTIONS ->"
        android:textSize="20dp"
+       android:layout_marginBottom="100dp"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent" />
 

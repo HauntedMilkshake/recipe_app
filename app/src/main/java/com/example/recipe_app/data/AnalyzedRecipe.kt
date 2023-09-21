@@ -1,6 +1,6 @@
 package com.example.recipe_app.data
 
-data class AnalyzedRecipe(
+data class EnhancedRecipe(
     val id: Int,
     val title: String,
     val isVegetarian: Boolean,
@@ -10,8 +10,6 @@ data class AnalyzedRecipe(
     val isDairyFree: Boolean,
     val minutes: Int,
     val servings: Int,
-    val instructions: List<Instruction>,
-//    val instructions: List<String>,
     val ingredients: List<Ingredient>
 ) {
     data class Ingredient(
@@ -20,9 +18,5 @@ data class AnalyzedRecipe(
         val unit: String
     )
 
-    data class Instruction(
-        val stepNumber: Int,
-        val instruction: String
-    )
 }
 

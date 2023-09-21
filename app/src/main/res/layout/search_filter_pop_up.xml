@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RadioGroup
+        android:id="@+id/filters_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/search_by_ingredients_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredient Search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <RadioButton
+            android:id="@+id/search_by_nutrients_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nutrient Search"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        app:layout_constraintTop_toBottomOf="@+id/filters_radio_group"
+        tools:layout_editor_absoluteX="115dp" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/settings_exit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search_settings_exit"
+        app:layout_constraintStart_toEndOf="@+id/filters_radio_group" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

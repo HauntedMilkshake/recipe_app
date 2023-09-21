@@ -1,6 +1,7 @@
 package com.example.recipe_app.instructions
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,25 +13,32 @@ class FragmentRecipeInstructions: Fragment() {
     private var _binding: FragmentRecipeInstructionsBinding? = null
     private val binding get() = _binding!!
     private val instructionsViewModel: FragmentInstructionsViewModel by viewModels()
-    private var viewPagerAdapter = RecipeInstructionsPagerAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = FragmentRecipeInstructionsBinding.inflate(inflater, container, false)
         instructionsViewModel.fetchRecipeInformationById(arguments?.getInt("recipe_id")!!)
-        return super.onCreateView(inflater, container, savedInstanceState)
+
+        return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply{
+        var viewPagerAdapter = RecipeInstructionsPagerAdapter()
 
+        binding.apply{
             instructionsViewpager.adapter = viewPagerAdapter
-            instructionsViewModel.enhancedRecipe.observe(viewLifecycleOwner){recipe ->
-                viewPagerAdapter.updateInstructions(recipe.instructions)
+            instructionsViewModel.enhancedRecipe.observe(viewLifecycleOwner){instructions ->
+                Log.d("RECIPEININSTRUCTIONS", instructions.toString())
+                viewPagerAdapter.updateInstructions(instructions)
+
             }
+
         }
 
     }

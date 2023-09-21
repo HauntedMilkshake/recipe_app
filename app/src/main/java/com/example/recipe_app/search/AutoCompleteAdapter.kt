@@ -1,7 +1,6 @@
 package com.example.recipe_app.search
 
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +50,6 @@ class AutoCompleteAdapter : RecyclerView.Adapter<AutoCompleteAdapter.AutoComplet
         inner class AutoCompleteViewHolder(view:View) : RecyclerView.ViewHolder(view) {
             private val textView = view.findViewById<TextView>(R.id.autocomplete_text)
             fun bind(autoComplete: AutoCompleteResult) {
-                Log.d("BINDING DATA", "${autoComplete.toString()}")
                 textView.text = autoComplete.title
                 textView.setOnClickListener{
                     itemClickListener?.onItemClicked(autoComplete, absoluteAdapterPosition)

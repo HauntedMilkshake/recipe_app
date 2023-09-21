@@ -38,7 +38,6 @@ class FragmentHome : Fragment() {
                    .load(recipe.imageUrl)
                    //.transition(DrawableTransitionOptions.withCrossFade())
                    .into(binding.recipeImage)
-                Log.d("IDTOSEND", recipe.id.toString())
                 binding.recipeImage.setOnClickListener { findNavController().navigate(R.id.home_to_recipe_information, bundleOf("recipe_id" to recipe.id)) }
 
             }

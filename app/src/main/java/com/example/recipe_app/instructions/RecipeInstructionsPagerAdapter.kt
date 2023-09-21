@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipe_app.R
-import com.example.recipe_app.data.AnalyzedRecipe
+import com.example.recipe_app.data.Instructions
 
 class RecipeInstructionsPagerAdapter: RecyclerView.Adapter<RecipeInstructionsPagerAdapter.RecipesInstructionPager2ViewHolder>() {
-    private val items = ArrayList<AnalyzedRecipe.Instruction>()
+    private val items = ArrayList<Instructions>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecipesInstructionPager2ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_viewpager_instructions, parent, false))
 
     override fun getItemCount() = items.size
@@ -19,17 +19,17 @@ class RecipeInstructionsPagerAdapter: RecyclerView.Adapter<RecipeInstructionsPag
         holder.bind(items[position])
     }
 
-    fun updateInstructions(newInstructions:List<AnalyzedRecipe.Instruction>){
+    fun updateInstructions(newInstructions:List<Instructions>){
         items.clear()
         items.addAll(newInstructions)
         notifyDataSetChanged()
     }
     class RecipesInstructionPager2ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val stepNumber = view.findViewById<TextView>(R.id.step_number)
-        val stepDescription = view.findViewById<TextView>(R.id.step_description)
-        fun bind(instruction: AnalyzedRecipe.Instruction){
-            stepNumber.text = instruction.stepNumber.toString()
-            stepDescription.text = instruction.instruction
+        private val stepNumber = view.findViewById<TextView>(R.id.step_number)
+        private val stepDescription = view.findViewById<TextView>(R.id.step_description)
+        fun bind(instruction: Instructions){
+            stepNumber.text = instruction.number.toString()
+            stepDescription.text = instruction.step
         }
     }
 }

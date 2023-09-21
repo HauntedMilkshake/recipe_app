@@ -1,7 +1,6 @@
 package com.example.recipe_app.information
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ class FragmentRecipeInformation: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         informationViewModel.getRecipe(arguments?.getInt("recipe_id")!!)
-        Log.d("idReceive", arguments?.getInt("recipe_id").toString())
     }
 
 
@@ -50,7 +48,7 @@ class FragmentRecipeInformation: Fragment() {
                 findNavController().navigate(R.id.information_to_home)
             }
             instructionsButton.setOnClickListener {
-                findNavController().navigate(R.id.search_to_recipe_information, bundleOf("recipe_id" to arguments?.getInt("recipe_id")))
+                findNavController().navigate(R.id.information_to_instructions, bundleOf("recipe_id" to arguments?.getInt("recipe_id")))
             }
         }
 

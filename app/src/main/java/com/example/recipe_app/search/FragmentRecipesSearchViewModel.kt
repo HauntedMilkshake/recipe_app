@@ -1,36 +1,36 @@
 package com.example.recipe_app.search
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.recipe_app.data.AutoCompleteResult
-import com.example.recipe_app.data.RecipeResponse
+import com.example.recipe_app.data.Recipe
 import com.example.recipe_app.getApiService
+import com.example.recipe_app.search.mode.SearchMode
 import kotlinx.coroutines.launch
 
 class FragmentRecipesSearchViewModel(application: Application) : AndroidViewModel(application) {
     private val api = application.getApiService()
     private val _autoCompleteText = MutableLiveData<List<AutoCompleteResult>>()
-    private val _recipes = MutableLiveData<List<RecipeResponse>>()
+    private val _recipes = MutableLiveData<List<Recipe>>()
     val autoCompleteText: LiveData<List<AutoCompleteResult>> get() = _autoCompleteText
-    val recipes: LiveData<List<RecipeResponse>> get() = _recipes
-//    fun fetchAutoCompleteText(query: String){
-//        _autoCompleteText.value = listOf(AutoCompleteResult(1, "food"), AutoCompleteResult(2, "sofasdf"))
-//    }
+    val recipes: LiveData<List<Recipe>> get() = _recipes
+
     fun fetchAutoCompleteText(query: String){
         viewModelScope.launch {
             _autoCompleteText.postValue(api.getAutoComplete(query))
-            Log.d("autoComplete", "${_autoCompleteText.value.toString()}")
         }
     }
 
-    fun fetchRecipes(query: String){
+    fun fetchRecipes(query: String, searchMode: SearchMode){
         viewModelScope.launch {
-            _recipes.postValue(api.getRecipesByComplexSearch(query))
-            Log.d("RECIPES", "${_recipes.value.toString()}")
+            when(searchMode){
+                SearchMode.SEARCHBYINGREDIENTS -> _recipes.postValue(api.getRecipeByIngredientSearch(query))
+                SearchMode.SEARCHBYNUTRIENTS -> _recipes.postValue(api.getRecipeByNutrientSearch(query))
+                else -> _recipes.postValue(api.getRecipesByComplexSearch(query))
+            }
         }
     }
 
