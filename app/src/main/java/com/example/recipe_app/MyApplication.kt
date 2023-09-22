@@ -10,6 +10,8 @@ class MyApplication: Application() {
     val apiService: RetrofitRecipeApiService by lazy {
         RetrofitRecipeApiService.getApi()
     }
+//    val recipeDatabase = DaoProvider.getRecipeDao(applicationContext)
+
 
     override fun onCreate() {
         super.onCreate()
@@ -18,3 +20,4 @@ class MyApplication: Application() {
 }
 
 fun Application.getApiService() = (this as MyApplication).apiService
+//fun Application.getRecipeDatabase() = (this as MyApplication).recipeDatabase

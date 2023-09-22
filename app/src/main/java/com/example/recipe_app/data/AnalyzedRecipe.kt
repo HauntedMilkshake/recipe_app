@@ -17,6 +17,5 @@ data class EnhancedRecipe(
         val amount: Float,
         val unit: String
     )
-
 }
 

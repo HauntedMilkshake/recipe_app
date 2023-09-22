@@ -4,11 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
     <RadioGroup
         android:id="@+id/filters_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <RadioButton
             android:id="@+id/search_by_ingredients_button"
             android:layout_width="wrap_content"
@@ -16,6 +20,7 @@
             android:text="Ingredient Search"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <RadioButton
             android:id="@+id/search_by_nutrients_button"
             android:layout_width="wrap_content"
@@ -23,22 +28,57 @@
             android:text="Nutrient Search"
             app:layout_constraintTop_toTopOf="parent" />
     </RadioGroup>
-
-    <Button
-        android:id="@+id/reset_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset"
-        app:layout_constraintTop_toBottomOf="@+id/filters_radio_group"
-        tools:layout_editor_absoluteX="115dp" />
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/settings_exit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_search_settings_exit"
-        app:layout_constraintStart_toEndOf="@+id/filters_radio_group" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/filters_radio_group"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/carb_range_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="10"
+        android:valueTo="100"
+        app:values="@array/nutrients_range"
+        app:layout_constraintTop_toBottomOf="@+id/filters_radio_group" />
 
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/protein_range_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="10"
+        android:valueTo="100"
+        app:values="@array/nutrients_range"
+        app:layout_constraintTop_toBottomOf="@+id/carb_range_slider" />
 
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/fat_range_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="10"
+        android:valueTo="100"
+        app:values="@array/nutrients_range"
+        app:layout_constraintTop_toBottomOf="@+id/protein_range_slider" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_current_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fat_range_slider" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:layout_marginRight="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fat_range_slider" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@
         android:id="@+id/favourite_image"
         android:layout_width="64dp"
         android:layout_height="64dp"
+        android:src="@drawable/ic_search_favourite"
         app:layout_constraintStart_toEndOf="@+id/recipe_title"
         app:layout_constraintTop_toTopOf="parent" />
 

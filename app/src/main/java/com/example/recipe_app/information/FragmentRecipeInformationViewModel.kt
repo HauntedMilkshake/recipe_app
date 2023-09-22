@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 
 class FragmentRecipeInformationViewModel(application: Application): AndroidViewModel(application) {
     private val api = application.getApiService()
+//    private val database = application.getRecipeDatabase()
     private val _enhancedRecipe = MutableLiveData<EnhancedRecipe>()
     val enhancedRecipe: LiveData<EnhancedRecipe> get() = _enhancedRecipe
     fun getRecipe(id: Int){
@@ -20,4 +21,19 @@ class FragmentRecipeInformationViewModel(application: Application): AndroidViewM
             Log.d("LiveData", enhancedRecipe.value.toString())
         }
     }
+//    fun insertRecipe(recipe: EnhancedRecipe){
+//        viewModelScope.launch {
+//            database.insertRecipe(recipe)
+//        }
+//    }
+//    private fun convertToRoomRecipe(recipe: EnhancedRecipe?): FavouriteRecipes = FavouriteRecipes(id = recipe!!.id, title = recipe.title, isVegetarian = recipe.isVegetarian, imageUrl = recipe.imageUrl, isVegan = recipe.isVegan, isGlutenFree = recipe.isGlutenFree, isDairyFree = recipe.isDairyFree, minutes = recipe.minutes, servings = recipe.servings, ingredients = convertEnhancedIngredientsToRoomIngredients(recipe.ingredients))
+//    private fun convertEnhancedIngredientsToRoomIngredients(ingredients: List<EnhancedRecipe.Ingredient>): List<FavouriteRecipes.Ingredient>{
+//        return ingredients.mapNotNull{
+//            FavouriteRecipes.Ingredient(
+//                name = it.name,
+//                amount = it.amount,
+//                unit = it.unit
+//            )
+//        }
+//    }
 }

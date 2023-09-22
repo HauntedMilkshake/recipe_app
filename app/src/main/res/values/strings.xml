@@ -19,6 +19,22 @@
     <string name="recipe_of_the_day">Want to try something <font color="#FC9F5B">new</font>?</string>
     <!-- Strings used for custom recipe view -->
     <string name="recipe_text">Placeholder Recipe Text</string>
+    <!-- Strings used for popup settings -->
+    <string name="min_carbs_text">min carbs:</string>
+    <string name="max_carbs_text">max carbs:</string>
+    <string name="min_protein_text">min protein:</string>
+    <string name="max_protein_text">max protein:</string>
+    <string name="min_fat_text">min fat:</string>
+    <string name="max_fat_text">max fat:</string>
+    <string name="min_calories_text">min calories:</string>
+    <string name="max_calories_text">max calories:</string>
+    <!-- Strings used for trivia-->
+    <string name="trivia_welcome_text">Welcome to trivia you <font color="FC9F5B">NERD!</font></string>
+
+
+
+
+
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

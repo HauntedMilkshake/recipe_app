@@ -35,16 +35,16 @@
     </fragment>
     <fragment
         android:id="@+id/trivia"
-        android:name="com.example.recipe_app.FragmentRandomFoodFacts"
+        android:name="com.example.recipe_app.trivia.FragmentRandomFoodFacts"
         android:label="@string/trivia"
         tools:layout="@layout/fragment_random_food_facts" >
         <action
-            android:id="@+id/trivia_to_recipe_information"
-            app:destination="@+id/recipe_information" />
+            android:id="@+id/action_trivia_to_search"
+            app:destination="@id/search" />
     </fragment>
     <fragment
         android:id="@+id/favourites"
-        android:name="com.example.recipe_app.FragmentFavourites"
+        android:name="com.example.recipe_app.favourites.FragmentFavourites"
         android:label="@string/favourites"
         tools:layout="@layout/fragment_favourites">
         <action

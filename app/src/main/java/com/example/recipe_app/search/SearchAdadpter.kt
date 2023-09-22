@@ -33,15 +33,24 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchAdapterViewHolder
     inner class SearchAdapterViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val recipeImage = view.findViewById<ImageView>(R.id.recipe_image)
         private val recipeTitle = view.findViewById<TextView>(R.id.recipe_title)
+        private val favouriteImage = view.findViewById<ImageView>(R.id.favourite_image)
         fun bind(recipe: Recipe){
             Glide.with(recipeImage)
                 .load(recipe.image)
                 .into(recipeImage)
             recipeTitle.text = recipe.title
             recipeImage.setOnClickListener {
-                itemClickListener?.onItemClicked(recipe, absoluteAdapterPosition)
+                itemClickListener?.onItemClicked(recipe, absoluteAdapterPosition, recipeImage)
+            }
+            favouriteImage.setOnClickListener {
+                itemClickListener?.onItemClicked(recipe, absoluteAdapterPosition, favouriteImage)
             }
 
         }
     }
+    interface ItemClickListener<T> {
+        fun onItemClicked(item: T, itemPosition: Int, clickedView: View)
+    }
 }
+
+
