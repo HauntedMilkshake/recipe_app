@@ -14,7 +14,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginRight="45dp"
         android:text="@string/recipe_of_the_day"
-        android:textColor="@color/vanilla"
+        android:textColor="@color/robin_egg_blue"
         android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:padding="16dp"
-            android:textColor="@color/sandy_brown"
+            android:textColor="@color/lavender"
             android:textSize="23sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/random_liked_recipes"
-        android:textColor="@color/vanilla"
+        android:textColor="@color/robin_egg_blue"
         android:textSize="25sp"
         android:layout_marginTop="50dp"
 
@@ -71,8 +71,8 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

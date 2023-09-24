@@ -22,13 +22,4 @@ class EnhancedRecipeAdapter : Adapter<EnhancedRecipeResponse.EnhancedRecipe, Enh
             )
         }
     }
-//    fun adaptIngredients(ingredients: List<EnhancedRecipeResponse.EnhancedRecipe.Ingredient>?): List<EnhancedRecipe.Ingredient> {
-//        return ingredients?.map {
-//            EnhancedRecipe.Ingredient(
-//                name = it.name ?: "",
-//                amount = it.amount ?: 0.0f,
-//                unit = it.unit ?: ""
-//            )
-//        } ?: emptyList()
-//    }
 }

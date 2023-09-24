@@ -87,27 +87,12 @@ class FragmentRecipeInformation: Fragment() {
             }
         }
 
-        //no worky 😢😢
-//        informationViewModel.vladiMirishe.observe(viewLifecycleOwner){
-//            binding.apply {
-//                webView.settings.javaScriptEnabled = true
-//                Log.d("HTML", it)
-//
-//                webView.webViewClient = object : WebViewClient() {
-//                    override fun onPageFinished(view: WebView?, url: String?) {
-//                        super.onPageFinished(view, url)
-//                        view!!.loadData(it, "text/html", "UTF-8")
-//                    }
-//                }
-//                webView.webChromeClient = object : WebChromeClient() {
-//                    override fun onConsoleMessage(consoleMessage: ConsoleMessage): Boolean {
-//                        val message = "${consoleMessage.message()} -- From line ${consoleMessage.lineNumber()} of ${consoleMessage.sourceId()}"
-//                        Log.d("WebViewConsole", message)
-//                        return true
-//                    }
-//                }
-//            }
-//        }
+        informationViewModel.vladiMirishe.observe(viewLifecycleOwner){
+            binding.apply {
+                webView.settings.javaScriptEnabled = true
+                webView.loadData(it, "text/html", "UTF-8")
+            }
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

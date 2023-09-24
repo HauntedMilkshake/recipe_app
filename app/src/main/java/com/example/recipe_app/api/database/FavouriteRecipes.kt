@@ -24,4 +24,12 @@ data class Ingredient(
     @ColumnInfo("amount") val amount: Float,
     @ColumnInfo("unit") val unit: String
 )
+@Entity(tableName = "instructions")
+data class Instruction(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @ColumnInfo("recipeId") val recipeId: Int,
+    @ColumnInfo("stepNumber") val stepNumber: Int,
+    @ColumnInfo("instruction") val instruction: String
+
+)
 

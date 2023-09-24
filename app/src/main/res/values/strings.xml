@@ -1,25 +1,19 @@
 <resources>
     <string name="app_name">recipe_app</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="fragment_home">Home Screen</string>
     <string name="fragment_recipe_information">Recipe Information</string>
     <string name="fragment_search_recipes">Search Recipes</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="fragment_recipe_instructions">Recipe Instructions</string>
-    <!-- Strings used for bottom navigation bar -->
     <string name="search_recipe">search</string>
     <string name="favourites">favourites</string>
     <string name="home">home</string>
     <string name="trivia">trivia</string>
-    <!-- Strings used for text views -->
-    <!-- Strings for home screen -->
     <string name="random_liked_recipes">These are some of your favourites!</string>
-    <string name="recipe_of_the_day">Want to try something <font color="#FC9F5B">new</font>?</string>
-    <!-- Strings used for custom recipe view -->
+    <string name="recipe_of_the_day">Want to try something <font color="#EAE8FF">new</font>?</string>
     <string name="recipe_text">Placeholder Recipe Text</string>
-    <!-- Strings used for popup settings -->
     <string name="min_carbs_text">min carbs:</string>
     <string name="max_carbs_text">max carbs:</string>
     <string name="min_protein_text">min protein:</string>
@@ -28,8 +22,7 @@
     <string name="max_fat_text">max fat:</string>
     <string name="min_calories_text">min calories:</string>
     <string name="max_calories_text">max calories:</string>
-    <!-- Strings used for trivia-->
-    <string name="trivia_welcome_text">Welcome to trivia you <font color="FC9F5B">NERD!</font></string>
+    <string name="trivia_welcome_text">Welcome to trivia you NERD!</string>
     <string name="search_popup_carb_text">Carbohydrates range</string>
     <string name="search_popup_protein_text">Protein range</string>
     <string name="search_popup_fat_text">Fat range</string>
@@ -38,15 +31,5 @@
     <string name="search_autocomplete_label_text">Are you looking for</string>
     <string name="fragment_instructions_instructions_label">Instructions</string>
     <string name="fragment_instructions_ingredients_label">Ingredients</string>
-
-
-
-
-
-
-
-
-
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

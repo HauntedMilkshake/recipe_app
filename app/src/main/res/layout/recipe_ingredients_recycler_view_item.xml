@@ -5,51 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/ingredient_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Product:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ingredient_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="INGREDIENT"
         android:textSize="20sp"
-        android:layout_marginLeft="15dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ingredient_label"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/amount_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:gravity="center"
-        android:text="Amount:"
-        android:textSize="20sp"
-        android:layout_marginLeft="15dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ingredient_name"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ingredient_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
         android:gravity="center"
+        android:text="amount"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/amount_label"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ingredient_name"
+        app:layout_constraintStart_toEndOf="@+id/ingredient_name"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

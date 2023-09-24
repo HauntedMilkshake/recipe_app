@@ -13,6 +13,7 @@
         android:layout_marginTop="100dp"
         android:text="@string/trivia_welcome_text"
         android:textSize="30sp"
+        android:textColor="@color/robin_egg_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

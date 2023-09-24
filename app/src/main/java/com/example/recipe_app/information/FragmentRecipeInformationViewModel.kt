@@ -11,18 +11,20 @@ import com.example.recipe_app.getApiService
 import com.example.recipe_app.getRecipeDatabase
 import com.example.recipe_app.utils.toEnhancedRecipe
 import com.example.recipe_app.utils.toRoomIngredient
+import com.example.recipe_app.utils.toRoomInstruction
 import com.example.recipe_app.utils.toRoomRecipe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FragmentRecipeInformationViewModel(application: Application): AndroidViewModel(application) {
     private val api = application.getApiService()
-    //    private val htmlApi = application.getHtmlRecipeApi()
     private val database = application.getRecipeDatabase()
     private val _enhancedRecipe = MutableLiveData<EnhancedRecipe>()
     val enhancedRecipe: LiveData<EnhancedRecipe> get() = _enhancedRecipe
     private val _isFavourited = MutableLiveData<Boolean>(false)
     val isFavourited: LiveData<Boolean> get() = _isFavourited
+    private val _vladiMirishe = MutableLiveData<String>()
+    val vladiMirishe: LiveData<String> get() = _vladiMirishe
 
     //in spirits of optimization we know that we dont need api requests when coming from favourites,
     // we know that we might need an api request when coming from home and it is just easier
@@ -60,15 +62,12 @@ class FragmentRecipeInformationViewModel(application: Application): AndroidViewM
             }
         }
     }
-
     fun favouriteRecipes() {
         viewModelScope.launch(Dispatchers.IO) {
             _isFavourited.postValue(false)
-
             database.insertRecipe(enhancedRecipe.value!!.toRoomRecipe())
-            database.insertIngredients(
-                api.getIngredientsFromRecipeId(enhancedRecipe.value!!.id)
-                    .mapNotNull { it.toRoomIngredient(enhancedRecipe.value!!.id) })
+            database.insertIngredients(api.getIngredientsFromRecipeId(enhancedRecipe.value!!.id).mapNotNull{ it.toRoomIngredient(enhancedRecipe.value!!.id) })
+            database.insertInstructions(api.getRecipeInstructionsById(enhancedRecipe.value!!.id).mapNotNull{ it.toRoomInstruction(enhancedRecipe.value!!.id) })
         }
     }
 
@@ -78,22 +77,10 @@ class FragmentRecipeInformationViewModel(application: Application): AndroidViewM
             _isFavourited.postValue(false)
             database.deleteRecipeById(recipeId)
             database.deleteIngredientByRecipeId(recipeId)
+            database.deleteInstructionsForRecipe(recipeId
+            )
         }
     }
-    //HTML in string for this functionality -> * Use the https://api.spoonacular.com/recipes/%7Bid%7D/tasteWidget.json to enrich the favorite recipe and show extra info for the taste.*
-//    private val _vladiMirishe = MutableLiveData<String>()
-//    val vladiMirishe: LiveData<String> get() = _vladiMirishe
-//    fun getRecipe(id: Int){
-//        viewModelScope.launch {
-//            _enhancedRecipe.postValue(api.getRecipeById(id))
-//        }
-//    }
-//    fun vladiMirishe(id: Int) {
-//        viewModelScope.launch {
-//                val htmlResult = htmlApi.getVladiMirishe(id)
-//                _vladiMirishe.postValue(htmlResult)
-//        }
-//    }
 }
 
 

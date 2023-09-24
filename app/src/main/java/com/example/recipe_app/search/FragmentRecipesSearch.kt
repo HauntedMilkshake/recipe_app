@@ -113,9 +113,16 @@ class FragmentRecipesSearch: Fragment() {
             }
         }
         searchViewModel.autoCompleteText.observe(viewLifecycleOwner){
-            binding.apply { autocompleteAdapter.updateItems(it) }
+            binding.apply {
+                autocompleteAdapter.updateItems(it)
+            }
         }
         searchViewModel.recipes.observe(viewLifecycleOwner){
+            if(it.isEmpty()){
+                binding.noResults.visibility = View.VISIBLE
+            }else{
+                binding.noResults.visibility = View.GONE
+            }
             binding.apply { searchAdapter.updateItems(it) }
         }
         searchViewModel.searchMode.observe(viewLifecycleOwner){

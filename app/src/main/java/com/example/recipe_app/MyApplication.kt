@@ -13,8 +13,7 @@ class MyApplication: Application() {
     val apiService: RetrofitRecipeApiService by lazy {
         RetrofitRecipeApiService.getApi()
     }
-//    val htmlApiService: HtmlRetrofitRecipeApiService
-//        get() = HtmlRetrofitRecipeApiService()
+
     lateinit var recipeDatabase: RecipeDao
 
     override fun onCreate() {
@@ -27,4 +26,4 @@ class MyApplication: Application() {
 
 fun Application.getApiService() = (this as MyApplication).apiService
 fun Application.getRecipeDatabase() = (this as MyApplication).recipeDatabase
-//fun Application.getHtmlRecipeApi() = (this as MyApplication).htmlApiService
+

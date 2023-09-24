@@ -2,40 +2,19 @@ package com.example.recipe_app.utils
 
 import IngredientResponse
 import com.example.recipe_app.common.Adapter
-import com.example.recipe_app.data.Ingredients
+import com.example.recipe_app.data.Ingredient
 
 
-class RecipeIngredientAdapter: Adapter<IngredientResponse.Ingredient, Ingredients.Ingredient> {
-    override fun adapt(t: IngredientResponse.Ingredient): Ingredients.Ingredient? {
-        return if(t.amount == null || t.name == null){
+class RecipeIngredientAdapter: Adapter<IngredientResponse.Ingredient, Ingredient> {
+    override fun adapt(t: IngredientResponse.Ingredient): Ingredient? {
+        return if(t.name == null || t.amount == null || t.amount.metric == null || t.amount.metric.value == null || t.amount.metric.unit == null){
              null
         }else{
-             Ingredients.Ingredient(
+            Ingredient(
                 name = t.name,
-                amount = adaptAmount(t.amount)!!
+                unit = t.amount.metric.unit,
+                value = t.amount.metric.value
             )
         }
     }
-    private fun adaptAmount(t: IngredientResponse.Ingredient.Amount): Ingredients.Ingredient.Amount? {
-        return if(t.metric == null){
-            null
-        }else{
-            Ingredients.Ingredient.Amount(
-                metric = adaptMetric(t.metric)!!
-            )
-        }
-    }
-    private fun adaptMetric(t: IngredientResponse.Ingredient.Amount.Metric): Ingredients.Ingredient.Amount.Metric? {
-        return if(t.unit == null || t.value == null){
-            null
-        }else{
-            Ingredients.Ingredient.Amount.Metric(
-                unit = t.unit,
-                value = t.value
-            )
-        }
-    }
-
-
-
 }
