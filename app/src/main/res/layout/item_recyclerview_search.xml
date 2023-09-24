@@ -4,31 +4,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/recipe_image"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/recipe_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Corner16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/recipe_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/vanilla"
-        android:textSize="18dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/recipe_image"
         app:layout_constraintStart_toEndOf="@+id/recipe_image"
         app:layout_constraintEnd_toStartOf="@+id/favourite_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/recipe_image"
+        app:layout_constraintWidth_default="wrap"
+        app:layout_constraintWidth_percent="0.6" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/favourite_image"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@drawable/ic_search_favourite"
-        app:layout_constraintStart_toEndOf="@+id/recipe_title"
+        android:src="@drawable/ic_unfavourite_recipe"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.example.recipe_app.trivia
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,11 +22,9 @@ class FragmentRandomFoodFactsViewModel(application: Application) : AndroidViewMo
 
     fun fetchTriviaAndDetectedFoods() {
         viewModelScope.launch {
-            val triviaValue = api.getRandomFoodTrivia()
-            _trivia.postValue(triviaValue)
-            Log.d("FOOD IN SCOPE", triviaValue)
-            val detectedFoodsValue = api.getFoodFromFoodDetect(triviaValue)
-            _detectedFoods.postValue(detectedFoodsValue)
+            val trivia = api.getRandomFoodTrivia()
+            _trivia.postValue(trivia)
+            _detectedFoods.postValue(api.getFoodFromFoodDetect(trivia))
         }
     }
 }

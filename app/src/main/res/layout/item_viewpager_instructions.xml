@@ -4,25 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <TextView
         android:id="@+id/step_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/vanilla"
         android:padding="10dp"
+        android:textColor="@color/robin_egg_blue"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/step_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="@color/vanilla"
-        android:textSize="20sp"
         android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/robin_egg_blue"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/step_number"
         app:layout_constraintStart_toStartOf="@+id/step_number"
         app:layout_constraintTop_toBottomOf="@+id/step_number" />
 

@@ -8,17 +8,27 @@ import androidx.lifecycle.viewModelScope
 import com.example.recipe_app.data.AutoCompleteResult
 import com.example.recipe_app.data.Recipe
 import com.example.recipe_app.getApiService
+import com.example.recipe_app.getRecipeDatabase
 import com.example.recipe_app.search.mode.SearchMode
+import com.example.recipe_app.utils.toRoomIngredient
+import com.example.recipe_app.utils.toRoomRecipe
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FragmentRecipesSearchViewModel(application: Application) : AndroidViewModel(application) {
     private val api = application.getApiService()
-//    private val database = application.getRecipeDatabase()
+    private val database = application.getRecipeDatabase()
     private val _autoCompleteText = MutableLiveData<List<AutoCompleteResult>>()
-    private val _recipes = MutableLiveData<List<Recipe>>()
     val autoCompleteText: LiveData<List<AutoCompleteResult>> get() = _autoCompleteText
+
+    private val _recipes = MutableLiveData<List<Recipe>>()
     val recipes: LiveData<List<Recipe>> get() = _recipes
-    private var searchMode: SearchMode = SearchMode.COMPLEXSEARCH
+
+    private val _isFavorite = MutableLiveData<Boolean>(false)
+    val isFavorite: LiveData<Boolean> get() = _isFavorite
+
+    private val _searchMode = MutableLiveData<SearchMode>(SearchMode.COMPLEXSEARCH)
+    val searchMode: LiveData<SearchMode> get() = _searchMode
 
     private var carbRange: Pair<Int, Int> = Pair(10, 100)
     private var proteinRange: Pair<Int, Int> = Pair(10, 100)
@@ -39,11 +49,7 @@ class FragmentRecipesSearchViewModel(application: Application) : AndroidViewMode
         fatRange = Pair(min, max)
     }
 
-    fun getSearchMode() = searchMode
 
-    fun setSearchMode(mode: SearchMode) {
-        searchMode = mode
-    }
 
     fun fetchAutoCompleteText(query: String) {
         viewModelScope.launch {
@@ -52,8 +58,8 @@ class FragmentRecipesSearchViewModel(application: Application) : AndroidViewMode
     }
 
     fun fetchRecipes(query: String, minCarbs: Int, maxCarbs: Int, minProtein: Int, maxProtein: Int, minFat: Int, maxFat: Int) {
-        viewModelScope.launch {
-            when (searchMode) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (searchMode.value) {
                 SearchMode.SEARCHBYINGREDIENTS -> _recipes.postValue(api.getRecipeByIngredientSearch(query))
                 SearchMode.SEARCHBYNUTRIENTS -> _recipes.postValue(
                     api.getRecipeByNutrientSearch(minCarbs, maxCarbs, minProtein, maxProtein, minFat, maxFat))
@@ -61,20 +67,23 @@ class FragmentRecipesSearchViewModel(application: Application) : AndroidViewMode
             }
         }
     }
-//    fun favouriteRecipe(recipeId: Int){
-//        viewModelScope.launch {
-//            database.insertRecipe(convertToRoomRecipe(api.getRecipeById(recipeId)))
-//        }
-//    }
-////most likely could have been handled better
-//    private fun convertToRoomRecipe(recipe: EnhancedRecipe?): FavouriteRecipes = FavouriteRecipes(id = recipe!!.id, title = recipe.title, isVegetarian = recipe.isVegetarian, imageUrl = recipe.imageUrl, isVegan = recipe.isVegan, isGlutenFree = recipe.isGlutenFree, isDairyFree = recipe.isDairyFree, minutes = recipe.minutes, servings = recipe.servings, ingredients = convertEnhancedIngredientsToRoomIngredients(recipe.ingredients))
-//    private fun convertEnhancedIngredientsToRoomIngredients(ingredients: List<EnhancedRecipe.Ingredient>): List<Ingredient>{
-//        return ingredients.mapNotNull{
-//            FavouriteRecipes.Ingredient(
-//                name = it.name,
-//                amount = it.amount,
-//                unit = it.unit
-//            )
-//        }
-//    }
+    fun favouriteRecipe(recipeId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isFavorite.postValue(true)
+                val dbRecipe = api.getRecipeById(recipeId)!!.toRoomRecipe()
+                database.insertRecipe(dbRecipe)
+                val dbIngredients = api.getIngredientsFromRecipeId(recipeId)
+                database.insertIngredients(dbIngredients.mapNotNull { it.toRoomIngredient(dbRecipe.id) })
+        }
+    }
+    fun unfavouriteRecipe(recipeId: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            _isFavorite.postValue(false)
+            database.deleteRecipeById(recipeId)
+            database.deleteIngredientByRecipeId(recipeId)
+        }
+    }
+    fun addSearchMode(mode: SearchMode){
+        _searchMode.value = mode
+    }
 }

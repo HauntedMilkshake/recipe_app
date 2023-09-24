@@ -20,37 +20,95 @@
        android:id="@+id/favourite_button"
        android:layout_width="50dp"
        android:layout_height="50dp"
-       android:src="@drawable/ic_search_favourite"
+       android:src="@drawable/ic_unfavourite_recipe"
        android:layout_marginTop="20dp"
        android:layout_marginRight="20dp"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintTop_toTopOf="parent" />
 
+
    <com.google.android.material.imageview.ShapeableImageView
        android:id="@+id/recipe_image"
-       android:layout_width="100dp"
-       android:layout_height="100dp"
-       android:layout_marginLeft="45dp"
-       android:layout_marginTop="45dp"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent" />
+       android:background="@drawable/image_round_corners"
+       app:layout_constraintTop_toBottomOf="@+id/favourite_button"/>
+<!--      app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Corner16dp"-->
+        />
 
    <TextView
        android:id="@+id/recipe_title"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_marginTop="20dp"
        android:textColor="@color/vanilla"
        android:textSize="20sp"
-       app:layout_constraintStart_toStartOf="@+id/recipe_image"
+       android:padding="8dp"
+       android:gravity="center"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.498"
+       app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toBottomOf="@+id/recipe_image" />
 
-   <TextView
-       android:id="@+id/instructions_button"
+   <WebView
+       android:id="@+id/web_view"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="GO TO INSTRUCTIONS ->"
-       android:textSize="20dp"
+       app:layout_constraintBottom_toTopOf="@+id/instructions_button"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/glutenfree" />
+
+   <com.google.android.material.textview.MaterialTextView
+       android:id="@+id/vegan"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textColor="@color/sandy_brown"
+       android:textSize="16sp"
+       android:background="@drawable/text_round_background"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
+
+   <com.google.android.material.textview.MaterialTextView
+       android:id="@+id/vegeterian"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textColor="@color/sandy_brown"
+       android:textSize="12sp"
+       android:background="@drawable/text_round_background"
+       app:layout_constraintEnd_toStartOf="@+id/glutenfree"
+       app:layout_constraintStart_toEndOf="@+id/vegan"
+       app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
+
+   <com.google.android.material.textview.MaterialTextView
+       android:id="@+id/glutenfree"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textColor="@color/sandy_brown"
+       android:textSize="16sp"
+       android:background="@drawable/text_round_background"
+       app:layout_constraintEnd_toEndOf="@+id/recipe_title"
+       app:layout_constraintStart_toStartOf="@+id/recipe_title"
+       app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
+
+   <com.google.android.material.textview.MaterialTextView
+       android:id="@+id/dairy"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textColor="@color/sandy_brown"
+       android:textSize="16sp"
+       android:background="@drawable/text_round_background"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toEndOf="@+id/glutenfree"
+       app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
+
+
+   <ImageView
+       android:id="@+id/instructions_button"
+       android:layout_width="100dp"
+       android:layout_height="100dp"
+       android:src="@drawable/ic_information_instructions"
        android:layout_marginBottom="100dp"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent" />

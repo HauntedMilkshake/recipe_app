@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/popup_round_background"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
     <RadioGroup
         android:id="@+id/filters_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -17,7 +19,8 @@
             android:id="@+id/search_by_ingredients_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ingredient Search"
+            android:textSize="20sp"
+            android:text="@string/search_popup_ingredient_filter_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,35 +28,74 @@
             android:id="@+id/search_by_nutrients_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nutrient Search"
+            android:textSize="20sp"
+            android:text="@string/search_popup_nutrient_filter_text"
             app:layout_constraintTop_toTopOf="parent" />
     </RadioGroup>
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/settings_exit_button"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/reset_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reset_button" />
+
+    <TextView
+        android:id="@+id/carb_range_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_search_settings_exit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/filters_radio_group"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/search_popup_carb_text"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/carb_range_slider"
+        app:layout_constraintEnd_toEndOf="@+id/carb_range_slider"
+        app:layout_constraintStart_toStartOf="@+id/carb_range_slider"
+        app:layout_constraintTop_toBottomOf="@+id/filters_radio_group"/>
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/carb_range_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:valueFrom="10"
         android:valueTo="100"
-        app:values="@array/nutrients_range"
-        app:layout_constraintTop_toBottomOf="@+id/filters_radio_group" />
+        app:layout_constraintTop_toBottomOf="@+id/carb_range_label"
+        app:values="@array/nutrients_range" />
+
+    <TextView
+        android:id="@+id/protein_range_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/search_popup_protein_text"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/protein_range_slider"
+        app:layout_constraintEnd_toEndOf="@+id/protein_range_slider"
+        app:layout_constraintStart_toStartOf="@+id/protein_range_slider"
+        app:layout_constraintTop_toBottomOf="@+id/carb_range_slider" />
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/protein_range_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:valueFrom="10"
         android:valueTo="100"
         app:values="@array/nutrients_range"
-        app:layout_constraintTop_toBottomOf="@+id/carb_range_slider" />
+        app:layout_constraintTop_toBottomOf="@+id/protein_range_label" />
+    <TextView
+        android:id="@+id/fat_range_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_popup_fat_text"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/protein_range_slider" />
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/fat_range_slider"
@@ -61,24 +103,27 @@
         android:layout_height="wrap_content"
         android:valueFrom="10"
         android:valueTo="100"
-        app:values="@array/nutrients_range"
-        app:layout_constraintTop_toBottomOf="@+id/protein_range_slider" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/fat_range_label"
+        app:values="@array/nutrients_range" />
 
-    <com.google.android.material.button.MaterialButton
+    <ImageView
         android:id="@+id/save_current_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="save"
-        android:layout_marginLeft="50dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_save_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/reset_button"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reset_button" />
+
+    <ImageView
+        android:id="@+id/reset_button"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_popup_reset_filters"
+        app:layout_constraintEnd_toStartOf="@+id/settings_exit_button"
+        app:layout_constraintStart_toEndOf="@+id/save_current_settings"
         app:layout_constraintTop_toBottomOf="@+id/fat_range_slider" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/reset_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset"
-        android:layout_marginRight="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fat_range_slider" />
 </androidx.constraintlayout.widget.ConstraintLayout>

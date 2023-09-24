@@ -13,7 +13,7 @@ android {
         applicationId = "com.example.recipe_app"
         minSdk = 26
         //noinspection OldTargetApi
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -67,8 +67,13 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
-    implementation ("com.fasterxml.jackson.core:jackson-databind:2.15.2")
-    implementation ("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
+    implementation ("org.jsoup:jsoup:1.14.3")
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+
 
 
 }

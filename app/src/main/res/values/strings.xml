@@ -30,6 +30,17 @@
     <string name="max_calories_text">max calories:</string>
     <!-- Strings used for trivia-->
     <string name="trivia_welcome_text">Welcome to trivia you <font color="FC9F5B">NERD!</font></string>
+    <string name="search_popup_carb_text">Carbohydrates range</string>
+    <string name="search_popup_protein_text">Protein range</string>
+    <string name="search_popup_fat_text">Fat range</string>
+    <string name="search_popup_ingredient_filter_text">Ingredient search</string>
+    <string name="search_popup_nutrient_filter_text">Nutrient search</string>
+    <string name="search_autocomplete_label_text">Are you looking for</string>
+    <string name="fragment_instructions_instructions_label">Instructions</string>
+    <string name="fragment_instructions_ingredients_label">Ingredients</string>
+
+
+
 
 
 

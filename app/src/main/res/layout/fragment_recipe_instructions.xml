@@ -2,21 +2,49 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/oxford_blue"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/instructions_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_instructions_instructions_label"
+        android:textSize="30sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/instructions_viewpager"
+        app:layout_constraintStart_toStartOf="@+id/instructions_viewpager"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ingredient_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_instructions_ingredients_label"
+        android:textSize="30sp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/recipe_ingredients_recycler_view"
+        app:layout_constraintEnd_toEndOf="@+id/recipe_ingredients_recycler_view"
+        app:layout_constraintStart_toStartOf="@+id/recipe_ingredients_recycler_view" />
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/instructions_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/ingredient_label"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/instructions_label" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_ingredients_recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

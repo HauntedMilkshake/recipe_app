@@ -13,11 +13,11 @@
     <item
         android:id="@+id/favourites"
         android:enabled="true"
-        android:icon="@drawable/ic_bottom_nav_heart"
+        android:icon="@drawable/ic_bottom_nav_favourites"
         android:title="@string/favourites"/>
     <item
         android:id="@+id/trivia"
         android:enabled="true"
-        android:icon="@drawable/ic_bottom_nav_trivia"
+        android:icon="@drawable/think_2"
         android:title="@string/trivia"/>
 </menu>

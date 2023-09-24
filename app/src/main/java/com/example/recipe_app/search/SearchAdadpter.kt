@@ -37,6 +37,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchAdapterViewHolder
         fun bind(recipe: Recipe){
             Glide.with(recipeImage)
                 .load(recipe.image)
+                .placeholder(R.drawable.ic_search_no_results)
                 .into(recipeImage)
             recipeTitle.text = recipe.title
             recipeImage.setOnClickListener {

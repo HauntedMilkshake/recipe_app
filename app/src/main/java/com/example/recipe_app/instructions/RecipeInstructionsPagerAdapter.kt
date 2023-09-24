@@ -29,7 +29,6 @@ class RecipeInstructionsPagerAdapter: RecyclerView.Adapter<RecipeInstructionsPag
         private val stepDescription = view.findViewById<TextView>(R.id.step_description)
         fun bind(instruction: Instructions){
             stepNumber.text = instruction.number.toString()
-            stepDescription.text = instruction.step
-        }
+            stepDescription.text = instruction.step}
     }
 }
